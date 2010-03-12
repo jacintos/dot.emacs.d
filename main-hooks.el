@@ -10,10 +10,30 @@
 (dolist (hook '(scheme-mode-hook
                 emacs-lisp-mode-hook
                 lisp-mode-hook
+                c-mode-hook
+                csharp-mode-hook
+                objc-mode-hook
+                c++-mode
+                java-mode
                 erlang-mode-hook
                 python-mode-hook))
               (add-hook hook (lambda ()
                                (run-hooks 'programming-hook))))
+
+;; CC mode programming languages
+(defvar c-hook nil
+  "Hooks for CC mode programming languages.")
+
+(add-hook 'c-hook (lambda()
+                    (setq c-basic-offset 4)))
+
+(dolist (hook '(c-mode-hook
+                csharp-mode-hook
+                objc-mode-hook
+                c++-mode
+                java-mode))
+              (add-hook hook (lambda ()
+                               (run-hooks 'c-hook))))
 
 ;; Lisp modes
 (defvar lisp-hook nil
