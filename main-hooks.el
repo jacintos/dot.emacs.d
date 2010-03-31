@@ -58,4 +58,18 @@
                               (setq inferior-erlang-machine-options
                                     '("-sname" "emacs"))))
 
+;; Conditionally load nXhtml to keep startup fast
+(setq nxhtml-load-pattern ".+\\.\\(ctp\\|html?\\|xhtml\\)$")
+(defun load-nxhtml-if-required ()
+  (if (and (string-match nxhtml-load-pattern (buffer-file-name))
+           (not (featurep 'nxhtml-autostart)))
+      (progn
+        (load (expand-file-name "~/.emacs.d/site-lisp/nxhtml/autostart.el"))
+        ; nXhtml claims PHP files for itself and I don't quite like that
+        (dolist (rec auto-mode-alist)
+          (when (string-match ".*\\.php.*$" (car rec))
+            (setcdr rec 'php-mode))))))
+
+(add-hook 'find-file-hook 'load-nxhtml-if-required)
+
 (provide 'main-hooks)

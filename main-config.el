@@ -18,6 +18,9 @@
 (setq ido-enable-flex-matching t
       ido-max-prospects 7)
 
+;; Disable chunk coloring for submodes in nXhtml
+(setq-default mumamo-chunk-coloring 2)
+
 ;; No annoying startup message
 (setq inhibit-startup-message t)
 
