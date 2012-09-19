@@ -1,8 +1,11 @@
 
-;; Zenburn theme
-(require 'color-theme)
-(color-theme-initialize)
-(color-theme-twilight)
+;; Color theme
+;(require 'color-theme)
+;(color-theme-initialize)
+;(color-theme-light)
+
+;; Use new deftheme facility
+(load-theme 'tomorrow-night t)
 
 ;; Save place in files between sessions
 (require 'saveplace)
@@ -17,9 +20,6 @@
 (ido-mode t)
 (setq ido-enable-flex-matching t
       ido-max-prospects 7)
-
-;; Disable chunk coloring for submodes in nXhtml
-(setq-default mumamo-chunk-coloring 2)
 
 ;; No annoying startup message
 (setq inhibit-startup-message t)
@@ -48,9 +48,19 @@
 ;; Easier prompts
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+;(when (eq system-type 'darwin)
+;  (set-default-font "-*-Monaco-*-160-*"))
 (when (eq system-type 'darwin)
-  (set-default-font "-*-Monaco-*-160-*"))
+  (global-set-key [f6] 'ns-toggle-fullscreen))
 
-(add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
+;; Enable directory local variables with remote files. This facilitates both
+;; the (dir-locals-set-class-variables ...)(dir-locals-set-directory-class ...)
+;; and the dir-locals.el approaches.
+(defadvice hack-dir-local-variables (around my-remote-dir-local-variables)
+  "Allow directory local variables with remote files, by temporarily redefining
+     `file-remote-p' to return nil unconditionally."
+  (flet ((file-remote-p (&rest) nil))
+    ad-do-it))
+(ad-activate 'hack-dir-local-variables)
 
 (provide 'main-config)

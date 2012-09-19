@@ -16,6 +16,7 @@
                 c++-mode
                 java-mode
                 erlang-mode-hook
+                php-mode-hook
                 python-mode-hook))
               (add-hook hook (lambda ()
                                (run-hooks 'programming-hook))))
@@ -24,16 +25,16 @@
 (defvar c-hook nil
   "Hooks for CC mode programming languages.")
 
-(add-hook 'c-hook (lambda()
-                    (setq c-basic-offset 4)))
+;; (add-hook 'c-hook (lambda()
+;;                     (setq c-basic-offset 4)))
 
-(dolist (hook '(c-mode-hook
-                csharp-mode-hook
-                objc-mode-hook
-                c++-mode
-                java-mode))
-              (add-hook hook (lambda ()
-                               (run-hooks 'c-hook))))
+;; (dolist (hook '(c-mode-hook
+;;                 csharp-mode-hook
+;;                 objc-mode-hook
+;;                 c++-mode
+;;                 java-mode))
+;;               (add-hook hook (lambda ()
+;;                                (run-hooks 'c-hook))))
 
 ;; Lisp modes
 (defvar lisp-hook nil
@@ -48,6 +49,17 @@
               (add-hook hook (lambda ()
                                (run-hooks 'lisp-hook))))
 
+;; PHP with Drupal coding style
+(defconst my-php-style
+  '((c-offsets-alist . ((arglist-close . c-lineup-close-paren)))))
+(c-add-style "my-php-style" my-php-style)
+(add-hook 'php-mode-hook (lambda ()
+                           (c-set-offset 'case-label '+)
+                           (c-set-offset 'arglist-intro '+)
+                           (c-set-offset 'arglist-cont-nonempty 'c-lineup-math)
+                           (c-set-style "my-php-style")
+                           (setq c-basic-offset 2)))
+
 ;; Python
 (add-hook 'python-mode-hook (lambda ()
                               (define-key python-mode-map "\C-m"
@@ -57,19 +69,5 @@
 (add-hook 'erlang-mode-hook (lambda ()
                               (setq inferior-erlang-machine-options
                                     '("-sname" "emacs"))))
-
-;; Conditionally load nXhtml to keep startup fast
-(setq nxhtml-load-pattern ".+\\.\\(ctp\\|html?\\|xhtml\\)$")
-(defun load-nxhtml-if-required ()
-  (if (and (string-match nxhtml-load-pattern (buffer-file-name))
-           (not (featurep 'nxhtml-autostart)))
-      (progn
-        (load (expand-file-name "~/.emacs.d/site-lisp/nxhtml/autostart.el"))
-        ; nXhtml claims PHP files for itself and I don't quite like that
-        (dolist (rec auto-mode-alist)
-          (when (string-match ".*\\.php.*$" (car rec))
-            (setcdr rec 'php-mode))))))
-
-(add-hook 'find-file-hook 'load-nxhtml-if-required)
 
 (provide 'main-hooks)

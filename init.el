@@ -13,6 +13,13 @@
 (add-to-list 'load-path dotfiles-dir)
 (add-to-list 'load-path (concat dotfiles-dir "/site-lisp"))
 (add-to-list 'load-path (concat dotfiles-dir "/site-lisp/themes"))
+(add-to-list 'load-path (concat dotfiles-dir "/site-lisp/ecb"))
+(add-to-list 'load-path (concat dotfiles-dir "/site-lisp/jabber"))
+(add-to-list 'load-path (concat dotfiles-dir "/site-lisp/scala-mode"))
+(add-to-list 'load-path (concat dotfiles-dir "/site-lisp/geben"))
+
+;; Themes
+(add-to-list 'custom-theme-load-path (concat dotfiles-dir "/themes"))
 
 ;; ELPA
 (when
@@ -20,6 +27,19 @@
      (expand-file-name "~/.emacs.d/elpa/package.el"))
   (package-initialize))
 (require 'setup-elpa)
+
+;; Jabber
+(require 'hexrgb)
+(require 'jabber-autoloads)
+
+;; Scala
+(require 'scala-mode-auto)
+
+;; Org
+(require 'org-install)
+
+;; Deft
+(require 'deft)
 
 (require 'main-config)
 (require 'main-modes)
@@ -38,3 +58,27 @@
   (mapc #'load (directory-files user-specific-dir nil ".*el$")))
 
 (put 'upcase-region 'disabled nil)
+
+;; Load CEDET which is needed by ECB
+(load-file (concat dotfiles-dir "/site-lisp/cedet/common/cedet.el"))
+
+;; Autoload ECB
+(require 'ecb-autoloads)
+
+(autoload 'geben "geben" "PHP Debugger on Emacs" t)
+
+;; ECB settings version
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes (quote ("9117c98819cfdeb59780cb43e5d360ff8a5964d7dd9783b01708bda83098b9fd" "e439d894bf9406baf73056cf7e3c913ee5c794b6adadbbb9f614aebed0fd9ce7" "e992575f7c09459bfc190e6776b8f5f96964023e98267a87fb3094e7c9686776" default)))
+ '(ecb-options-version "2.40"))
+(put 'downcase-region 'disabled nil)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:inherit nil :stipple nil :background "black" :foreground "#ffffff" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 160 :width normal :foundry "apple" :family "Envy Code R")))))
