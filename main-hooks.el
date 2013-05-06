@@ -60,6 +60,11 @@
                            (c-set-style "my-php-style")
                            (setq c-basic-offset 2)))
 
+;; Web templates
+(add-hook 'web-mode-hook (lambda ()
+                           (setq web-mode-markup-indent-offset 4)
+                           (setq web-mode-disable-autocompletion nil)))
+
 ;; Python
 (add-hook 'python-mode-hook (lambda ()
                               (define-key python-mode-map "\C-m"
