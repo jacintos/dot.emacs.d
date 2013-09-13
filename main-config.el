@@ -20,6 +20,7 @@
 (ido-mode t)
 (setq ido-enable-flex-matching t
       ido-max-prospects 7)
+(setq ido-default-buffer-method 'selected-window)
 
 ;; No annoying startup message
 (setq inhibit-startup-message t)
@@ -44,6 +45,9 @@
 
 ;; Default to unified diffs
 (setq-default diff-switches "-u")
+
+;; 2-space indent for Coffeescript
+(setq coffee-tab-width 2)
 
 ;; Easier prompts
 (defalias 'yes-or-no-p 'y-or-n-p)
