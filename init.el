@@ -10,12 +10,9 @@
 ;; Load path
 (setq dotfiles-dir (file-name-directory
                     (or (buffer-file-name) load-file-name)))
-(add-to-list 'load-path dotfiles-dir)
+(add-to-list 'load-path (concat dotfiles-dir "/config"))
 (add-to-list 'load-path (concat dotfiles-dir "/site-lisp"))
 (add-to-list 'load-path (concat dotfiles-dir "/site-lisp/themes"))
-(add-to-list 'load-path (concat dotfiles-dir "/site-lisp/ecb"))
-(add-to-list 'load-path (concat dotfiles-dir "/site-lisp/jabber"))
-(add-to-list 'load-path (concat dotfiles-dir "/site-lisp/geben"))
 
 ;; Themes
 (add-to-list 'custom-theme-load-path (concat dotfiles-dir "/themes"))

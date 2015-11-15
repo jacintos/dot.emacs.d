@@ -67,4 +67,7 @@
     ad-do-it))
 (ad-activate 'hack-dir-local-variables)
 
+;; Allow proper JSX handling for React JS files
+(setq web-mode-content-types-alist '(("jsx"  . "\\.js[x]?\\'")))
+
 (provide 'main-config)
