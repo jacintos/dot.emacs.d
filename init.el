@@ -22,20 +22,16 @@
 
 ;; Package manager
 (require 'package)
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+(setq package-archives '(("melpa" . "http://melpa.org/packages/")
+			 ("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")))
 (package-initialize)
-
-;; Jabber
-(require 'hexrgb)
-(require 'jabber-autoloads)
 
 ;; Org
 (require 'org-install)
 
 ;; Deft
-(require 'deft)
+;(require 'deft)
 
 (require 'main-config)
 (require 'main-modes)
@@ -56,10 +52,10 @@
 (put 'upcase-region 'disabled nil)
 
 ;; Load CEDET which is needed by ECB
-(load-file (concat dotfiles-dir "/site-lisp/cedet/common/cedet.el"))
+;(load-file (concat dotfiles-dir "/site-lisp/cedet/common/cedet.el"))
 
 ;; Autoload ECB
-(require 'ecb-autoloads)
+;(require 'ecb-autoloads)
 
 (autoload 'geben "geben" "PHP Debugger on Emacs" t)
 
