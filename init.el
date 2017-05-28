@@ -62,8 +62,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("9117c98819cfdeb59780cb43e5d360ff8a5964d7dd9783b01708bda83098b9fd" "e439d894bf9406baf73056cf7e3c913ee5c794b6adadbbb9f614aebed0fd9ce7" "e992575f7c09459bfc190e6776b8f5f96964023e98267a87fb3094e7c9686776" default)))
- '(ecb-options-version "2.40"))
+ '(custom-safe-themes
+   (quote
+    ("9117c98819cfdeb59780cb43e5d360ff8a5964d7dd9783b01708bda83098b9fd" "e439d894bf9406baf73056cf7e3c913ee5c794b6adadbbb9f614aebed0fd9ce7" "e992575f7c09459bfc190e6776b8f5f96964023e98267a87fb3094e7c9686776" default)))
+ '(ecb-options-version "2.40")
+ '(js2-basic-offset 2)
+ '(js2-strict-missing-semi-warning nil))
 (put 'downcase-region 'disabled nil)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
